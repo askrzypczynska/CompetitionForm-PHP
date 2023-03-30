@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KursPHP</title>
-    <link rel="stylesheet" type="text/css" href="main.css" />
+    <link rel="stylesheet" type="text/css" href="form.css" />
 </head>
 <body>
     <div class="frontFoto">
@@ -25,7 +25,7 @@
             </a>
             </li>
             <li>
-                <a class="menuBtn" href="#">
+                <a class="menuBtn" href="rule.php">
                     Regulamin
                 </a>
             </li>
@@ -40,11 +40,11 @@
             <div class="user-details">
                 <div class="input-box">
                     <span class="details">Imię</span>
-                    <input type="text" class="icon" placeholder="Wpisz swoje imię" name="firstName" required>
+                    <input type="text" class="icon" placeholder="Wpisz swoje imię" name="firstName" maxlength="50" required>
                 </div>
                 <div class="input-box">
                     <span class="details">Nazwisko</span>
-                    <input type="text" class="icon" placeholder="Wpisz swoje nazwisko" name="lastName" required>
+                    <input type="text" class="icon" placeholder="Wpisz swoje nazwisko" name="lastName" maxlength="50" required>
                 </div>
                 <div class="input-box">
                     <span class="details">Adres email</span>
@@ -57,7 +57,7 @@
             </div>
             <div class="user-work">
                 <span class="details">Twoja praca konkursowa</span>
-                <textarea type="text" class="icon" placeholder="Wpisz swoją pracę konkursową, jej długość nie może przekraczać 500 znaków." name="contestWork" required maxlength="500"></textarea>
+                <textarea type="text" class="icon" placeholder="Wpisz swoją pracę konkursową, jej długość nie może przekraczać 150 znaków." name="contestWork" required maxlength="150"></textarea>
                 <input type="checkbox" class="statuteCheckbox" required>
                 <label for="">Akceptuje regulamin konkursu</label><br>
             </div>
@@ -68,8 +68,9 @@
     </div>
 
     <?php
-        // if(isset($_GET['firstName']) and isset($_GET))
-    ?>  
+
+    ?>
+
 
 </body>
 </html>
