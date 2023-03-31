@@ -166,14 +166,8 @@ form .user-details .input-box{
     margin-top: 25px;
 }
 
-.user-work a:link{
-    color: rgba(138,3,44,1);
-}
-.user-work a:visited{
-    color: rgb(87, 1, 27);
-}
-
 .user-work .details{
+    display: block;
     font-weight: 500;
     margin-bottom: 25px;
 }
@@ -246,16 +240,4 @@ if input:valid .icon {
     box-shadow: -5px 5px 5px 0px rgba(97, 61, 51, 0.38);
     background: linear-gradient(153deg, rgba(255,205,4,1) 0%, rgba(250,44,64,1) 53%, rgba(138,3,44,1) 100%);
 
-}
-
-.line{
-    float: left; 
-    width: 40%; 
-}
-
-.error{
-    width: 60%;
-    color: rgba(232,35,53,1);
-    font-size: 14px;
-    text-align: right;
 }

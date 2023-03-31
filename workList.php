@@ -9,34 +9,6 @@
 </head>
 <body>
 
-    <?php 
-
-    require_once "connect.php";
-    $connect = @new mysqli($host, $db_user, $db_password, $db_name);
-
-    $email = $_GET['email'];
-    $check = '/^[a-zA-Z0-9.\-_]+@[a-zA-Z0-9\-.]+\.[a-zA-Z]{2,4}$/';
-
-    if(preg_match($check, $email)){
-         header('Location: workList.php');    
-    } else{ 
-        header('Location: index.php');
-        $message = "Nieprawidłowy Email - Spróbuj ponownie";
-        echo "<script type='text/javascript'>alert('$message');</script>";
-    }
-
-
-    if($connect->connect_errno!=0){
-    } else {
-        $fistName = $_GET['firstName'];
-        $age = $_GET['dateBirth'];
-        $contestWork = $_GET['contestWork'];
-
-        $connect->close();
-    }
-
-
-    ?>  
     <div class="frontFoto">
         <div class="flowerImg"></div>
         <div class="flowerImgSec"></div>

@@ -36,30 +36,78 @@
             Jesienna Poezja: Konkurs Wierszu 2023
             <div class="title">FORMULARZ KONKURSOWY</div>
         </div>
-        <form action="workList.php" methode="get">
+
+        <!-- Formularz zostaje wysyłany do bazy danych w action="connect.php" 
+        na czas pracy nad walidacja formularza zostaje odpięty od formularza -->
+
+        <form method="post" action="result.php"> 
             <div class="user-details">
                 <div class="input-box">
-                    <span class="details">Imię</span>
-                    <input type="text" class="icon" placeholder="Wpisz swoje imię" name="firstName" maxlength="50" required>
+                    <span class="details line">Imię</span>
+                    <div class="error line">  
+                        <?php if(isset($name_error)){ echo $name_error; } ?>
+                    </div>
+                    <input type="text" class="icon" placeholder="Wpisz swoje imię" name="firstName" maxlength="50" 
+                        value="<?php
+								if (isset($_SESSION['firstName']))
+								{
+									echo $_SESSION['firstName'];
+									unset($_SESSION['firstName']);
+								}
+							?>">
+
                 </div>
                 <div class="input-box">
-                    <span class="details">Nazwisko</span>
-                    <input type="text" class="icon" placeholder="Wpisz swoje nazwisko" name="lastName" maxlength="50" required>
+                    <span class="details line">Nazwisko</span>
+                    <div class="error line">  
+                        <?php if(isset($lastName_error)){ echo $lastName_error; } ?>
+                    </div>
+                    <input type="text" class="icon" placeholder="Wpisz swoje nazwisko" name="lastName" maxlength="50" 
+                        value="<?php
+								if (isset($_SESSION['lastName']))
+								{
+									echo $_SESSION['lastName'];
+									unset($_SESSION['lastName']);
+								}
+							?>">
                 </div>
                 <div class="input-box">
-                    <span class="details">Adres email</span>
-                    <input type="text" class="icon" placeholder="Wpisz swój adres email" name="email" required>
+                    <span class="details line">Adres email</span>
+                    <div class="error line">  
+                        <?php if(isset($email_error)){ echo $email_error; } ?>
+                    </div>
+                    <input type="text" class="icon" placeholder="Wpisz swój adres email" name="email" 
+                        value="<?php
+								if (isset($_SESSION['email']))
+								{
+									echo $_SESSION['email'];
+									unset($_SESSION['email']);
+								}
+							?>">
                 </div>
                 <div class="input-box">
-                    <span class="details">Data urodzenia</span>
-                    <input type="date" name="dateBirth" required>
+                    <span class="details line">Data urodzenia</span>
+                    <div class="error line">  
+                        <?php if(isset($dateBirth_error)){ echo $dateBirth_error; } ?>
+                    </div>
+                    <input type="date" name="dateBirth" 
+                        value="<?php
+								if (isset($_SESSION['dateBirth']))
+								{
+									echo $_SESSION['dateBirth'];
+									unset($_SESSION['dateBirth']);
+								}
+							?>">
                 </div>
             </div>
             <div class="user-work">
-                <span class="details">Twoja praca konkursowa</span>
-                <textarea type="text" class="icon" placeholder="Wpisz swoją pracę konkursową, jej długość nie może przekraczać 150 znaków." name="contestWork" required maxlength="150"></textarea>
+                <span class="details line">Twoja praca konkursowa</span>
+                <div class="error line">  
+                        <?php if(isset($contestWork_error)){ echo $contestWork_error; } ?>
+                </div>
+                <textarea type="text" class="icon" placeholder="Wpisz swoją pracę konkursową, jej długość nie może przekraczać 150 znaków." name="contestWork" maxlength="150"><?php if (isset($_SESSION['contestWork'])){echo $_SESSION['contestWork']; unset($_SESSION['contestWork']);}?></textarea>
                 <input type="checkbox" class="statuteCheckbox" required>
-                <label for="">Akceptuje regulamin konkursu</label><br>
+                <label for="">Akceptuje <a href="rule.php">Regulamin Konkursu</a></label><br>
             </div>
             <div class="buttonSubmit">
                 <input type="submit" value="Wyślij">
