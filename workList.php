@@ -12,13 +12,17 @@
     if($conn->connect_error){
         die('Connection Failes :'. $conn->connetion_error);
     } else{
-        //Zapis do Bazy danych informacji
-        $stmt = $conn->prepare("insert into formularz(firstName, lastName, email, dateBirth, contestWork) values(?, ?, ?, ?, ?)");
-        $stmt->bind_param("sssss", $firstName, $lastName, $email, $dateBirth, $contestWork);
-        $stmt->execute();
+        if(isset($_POST['firstName'], $_POST['lastName'], $_POST['email'], $_POST['dateBirth'], $_POST['contestWork'])){
+            //Zapis do Bazy danych informacji
+            $stmt = $conn->prepare("insert into formularz(firstName, lastName, email, dateBirth, contestWork) values(?, ?, ?, ?, ?)");
+            $stmt->bind_param("sssss", $firstName, $lastName, $email, $dateBirth, $contestWork);
+            $stmt->execute();
+            $stmt->close();
+        } 
         //Odczyt informacji z Bazy danych
         $stmt2 = "SELECT firstName, lastName, email, contestWork from formularz";
         $result2 = $conn->query($stmt2);
+        $conn->close();
     }
 ?>
 
@@ -72,23 +76,13 @@
                 <?php 
                     if($result2->num_rows>0) {
                         while($row = $result2->fetch_assoc()) {
-                            echo "<tr><td>".$row['firstName']."</td><td>".$row['lastName']."</td><td>".$row['contestWork']."</td></tr><br/>";
+                            echo "<tr><td>".$row['firstName']."</td><td>".$row['lastName']."</td><td>".$row['contestWork']."</td></tr>";
                         }
                     }
                 ?>
-                <!-- <tr>
-                    <td>Name</td>
-                    <td>Age</td>
-                    <td>Text</td>
-                </tr> -->
             </table>
         </div>
     </div>
 
 </body>
 </html>
-
-<?php
-$stmt->close();
-$conn->close();
-?>
