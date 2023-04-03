@@ -25,7 +25,7 @@
         if(empty($firstName)){
             $all_ok = false;
             $name_error = "Imię jest niezbędne.";
-        } else if (!preg_match ("/^[a-zA-z]*$/", $firstName) ){
+        } else if (!preg_match ("/^[a-zA-zążśźęćńółĄŻŚŹĘĆŃÓŁ]*$/", $firstName) ){
             $all_ok = false;
             $name_error = "Imię powinno zawierać tylko litery.";
         } else {
@@ -36,7 +36,7 @@
         if(empty($lastName)){
             $all_ok = false;
             $lastName_error = "Nazwisko jest niezbędne.";
-        } else if (!preg_match ("/^[a-zA-z]*$/", $lastName) ){
+        } else if (!preg_match ("/^[a-zA-zążśźęćńółĄŻŚŹĘĆŃÓŁ]*$/", $lastName) ){
             $all_ok = false;
             $lastName_error = "Nazwisko powinno zawierać tylko litery.";
         } else {
@@ -102,6 +102,5 @@
     ?>  
 
     
-
 </body>
 </html>

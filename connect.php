@@ -15,7 +15,18 @@
         die('Connection Failes :'. $conn->connetion_error);
     } else{
         $stmt = $conn->prepare("insert into formularz(firstName, lastName, email, dateBirth, contestWork) values(?, ?, ?, ?, ?)");
+        $stmt2 = "SELECT firstName, lastName, email, contestWork from formularz";
         $stmt->bind_param("sssss", $firstName, $lastName, $email, $dateBirth, $contestWork);
+        $result2 = $conn->query($stmt2);
+
+        if($result2->num_rows>0) {
+            while($row = $result2->fetch_assoc()) {
+                echo "Imię: ".$row['firstName']. "Praca".$row['contestWork']. "<br />";
+            }
+        } else {
+            echo "Nie ma";
+        }
+
         $stmt->execute();
         $stmt->close();
         $conn->close();

@@ -1,3 +1,27 @@
+<?php
+    if(isset($_POST['firstName'], $_POST['lastName'], $_POST['email'], $_POST['dateBirth'], $_POST['contestWork'])){
+        $firstName = $_POST['firstName'];
+        $lastName = $_POST['lastName'];
+        $email = $_POST['email'];
+        $dateBirth = $_POST['dateBirth'];
+        $contestWork = $_POST['contestWork'];
+    }
+
+    //Połączenie z bazą danych
+    $conn = new mysqli('localhost', 'root', '', 'konkurs');
+    if($conn->connect_error){
+        die('Connection Failes :'. $conn->connetion_error);
+    } else{
+        //Zapis do Bazy danych informacji
+        $stmt = $conn->prepare("insert into formularz(firstName, lastName, email, dateBirth, contestWork) values(?, ?, ?, ?, ?)");
+        $stmt->bind_param("sssss", $firstName, $lastName, $email, $dateBirth, $contestWork);
+        $stmt->execute();
+        //Odczyt informacji z Bazy danych
+        $stmt2 = "SELECT firstName, lastName, email, contestWork from formularz";
+        $result2 = $conn->query($stmt2);
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -45,48 +69,26 @@
                     <th>Wiek</th>
                     <th>Praca Konkursowa</th>
                 </tr>
-                <tr>
-                    <td>Adaś</td>
-                    <td>14</td>
-                    <td>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam at aliquam lorem. Aliquam tincidunt magna leo, ut cursus ante lacinia id. Cras velit dui, cursus nec viverra non, egestas a nibh. Proin tempus risus in lacus faucibus condimentum. Duis non interdum erat, at sagittis elit. Phasellus efficitur eleifend augue sit amet viverra. Cras fermentum eleifend maximus. Donec eu sapien et augue pellentesque rutrum. Curabitur mattis eu nisi sit amet volutpat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi pulvinar, enim non tincidunt suscipit, mauris justo posuere quam, eget congue lectus diam congue nulla. Nulla iaculis velit ac mi congue, sit amet cursus ante porta. Ut egestas quis eros at pellentesque. Etiam at lacus a tellus volutpat auctor bibendum eget leo. Donec posuere auctor porta.
-                        Integer cursus dolor id tellus interdum, dapibus congue sem blandit. Phasellus varius porta risus, sit amet fermentum erat. Curabitur posuere mauris a efficitur tincidunt. Nunc.
-                    </td>
-                </tr>
-                <tr>
+                <?php 
+                    if($result2->num_rows>0) {
+                        while($row = $result2->fetch_assoc()) {
+                            echo "<tr><td>".$row['firstName']."</td><td>".$row['lastName']."</td><td>".$row['contestWork']."</td></tr><br/>";
+                        }
+                    }
+                ?>
+                <!-- <tr>
                     <td>Name</td>
                     <td>Age</td>
                     <td>Text</td>
-                </tr>
-                <tr>
-                    <td>Basia</td>
-                    <td>15</td>
-                    <td>Austria</td>
-                </tr>
-                <tr>
-                    <td>Hania</td>
-                    <td>19</td>
-                    <td>UK</td>
-                </tr>
-                <tr>
-                    <td>Maria</td>
-                    <td>10</td>
-                    <td>Canada</td>
-                </tr>
-                <tr>
-                    <td>Mojżesz</td>
-                    <td>9</td>
-                    <td>Italy</td>
-                </tr>
-                <tr>
-                    <td>Test</td>
-                    <td>0</td>
-                    <td>Italy</td>
-                </tr>
-
+                </tr> -->
             </table>
         </div>
     </div>
 
 </body>
 </html>
+
+<?php
+$stmt->close();
+$conn->close();
+?>

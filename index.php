@@ -102,7 +102,7 @@
             </div>
             <div class="user-work">
                 <span class="details line">Twoja praca konkursowa</span>
-                <div class="error line">  
+                <div class="error line">
                         <?php if(isset($contestWork_error)){ echo $contestWork_error; } ?>
                 </div>
                 <textarea type="text" class="icon" placeholder="Wpisz swoją pracę konkursową, jej długość nie może przekraczać 150 znaków." name="contestWork" maxlength="150"><?php if (isset($_SESSION['contestWork'])){echo $_SESSION['contestWork']; unset($_SESSION['contestWork']);}?></textarea>
