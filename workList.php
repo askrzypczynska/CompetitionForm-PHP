@@ -20,9 +20,10 @@
             $stmt->close();
         } 
         //Odczyt informacji z Bazy danych
-        $stmt2 = "SELECT firstName, lastName, email, contestWork from formularz";
+        $stmt2 = "SELECT firstName, lastName, dateBirth, contestWork from formularz";
         $result2 = $conn->query($stmt2);
         $conn->close();
+
     }
 ?>
 
@@ -76,9 +77,20 @@
                 <?php 
                     if($result2->num_rows>0) {
                         while($row = $result2->fetch_assoc()) {
-                            echo "<tr><td>".$row['firstName']."</td><td>".$row['lastName']."</td><td>".$row['contestWork']."</td></tr>";
+                            echo "<tr><td>".$row['firstName']."</td><td>".$row['dateBirth']."</td><td>".$row['contestWork']."</td></tr>";
                         }
                     }
+                    // $todayDate = new DateTime();
+                    // $Date = $todayDate->format('Y-m-d');
+                    // if ($Date) {
+                    //     echo $Date;
+                    // }
+
+                    // $todayDate = new DateTime();
+                    // $today = $todayDate->format('Y-m-d');
+            
+                    // $wynik= datediff(today(),)
+                    // echo $wynik;
                 ?>
             </table>
         </div>
