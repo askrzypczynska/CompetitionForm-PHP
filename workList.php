@@ -71,7 +71,7 @@
             <table>
                 <tr>
                     <th>Imię</th>
-                    <th>Wiek</th>
+                    <th>Rok Urodzenia</th>
                     <th>Praca Konkursowa</th>
                 </tr>
                 <?php 
